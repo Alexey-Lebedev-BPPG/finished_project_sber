@@ -43,7 +43,7 @@ export const SignUpForm: FC = () => {
       toast.success('Вы успешно зарегистрированы!');
       navigate(getRouteMain());
     } catch (error) {
-      console.log({ error });
+      console.log('error', error);
       toast.error(
         getMessageFromError(
           error,

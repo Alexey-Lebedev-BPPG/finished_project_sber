@@ -3,7 +3,7 @@ import urls from 'shared/consts/urls';
 import type { ISort } from '../model/types/productSchema';
 
 interface ProductsResponse {
-  products: Product[];
+  products: IProduct[];
   length: number;
 }
 
@@ -45,13 +45,13 @@ export const productApi = rtkApi.injectEndpoints({
       },
       providesTags: [{ type: 'Products', id: 'list' }],
     }),
-    getProduct: builder.query<Product, Pick<Product, 'id'>>({
+    getProduct: builder.query<IProduct, Pick<IProduct, 'id'>>({
       query: ({ id }) => ({ url: urls.products.productById(id) }),
       providesTags: productFromBE => [
         { type: 'Products', id: productFromBE?.id },
       ],
     }),
-    createProduct: builder.mutation<Product, Product>({
+    createProduct: builder.mutation<IProduct, IProduct>({
       query: product => ({
         url: urls.products.products,
         method: 'POST',
@@ -59,7 +59,7 @@ export const productApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'Products', id: 'list' }],
     }),
-    deleteProduct: builder.mutation<Product, Pick<Product, 'id'>>({
+    deleteProduct: builder.mutation<IProduct, Pick<IProduct, 'id'>>({
       query: ({ id }) => ({
         url: urls.products.productById(id),
         method: 'DELETE',
@@ -69,7 +69,7 @@ export const productApi = rtkApi.injectEndpoints({
         { type: 'Products', id: productFromBE?.id },
       ],
     }),
-    setLikeProduct: builder.mutation<SetLikeResponse, Pick<Product, 'id'>>({
+    setLikeProduct: builder.mutation<SetLikeResponse, Pick<IProduct, 'id'>>({
       query: ({ id }) => ({
         url: urls.products.productLike(id),
         method: 'PUT',
@@ -81,7 +81,7 @@ export const productApi = rtkApi.injectEndpoints({
     }),
     deleteLikeProduct: builder.mutation<
       DeleteLikeResponse,
-      Pick<Product, 'id'>
+      Pick<IProduct, 'id'>
     >({
       query: ({ id }) => ({
         url: urls.products.productLike(id),

@@ -1,6 +1,6 @@
 import { type ChangeEvent, type FC } from 'react';
-import { useSort } from '../../model/lib/hooks/useSort';
-import type { ISort } from '../../model/types/productSchema';
+import { useSort } from '../model/lib/hooks/useSort';
+import type { ISort } from 'entities/Product';
 
 export const Sort: FC = () => {
   const { sort, setSort, sortParams } = useSort();

@@ -1,7 +1,5 @@
+import { getSortSelector, setSort, type ISort } from 'entities/Product';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
-import type { ISort } from '../../types/productSchema';
-import { getSortSelector } from '../../selectors/productSelectors';
-import { setSort } from '../../slice/productSlice';
 
 interface SortParams {
   title: string;
@@ -13,9 +11,7 @@ export const useSort = () => {
 
   const sort = useAppSelector(getSortSelector);
 
-  const setSortLocal = (newSort: ISort) => {
-    dispatch(setSort(newSort));
-  };
+  const setSortLocal = (newSort: ISort) => dispatch(setSort(newSort));
 
   const sortParams: SortParams[] = [
     { title: 'Дешевые', value: 'low-price', href: '#' },

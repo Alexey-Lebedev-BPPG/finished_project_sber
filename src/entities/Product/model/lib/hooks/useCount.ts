@@ -2,7 +2,7 @@ import { type ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'shared/lib/hooks/redux';
 import { getCartProductsSelector } from '../../selectors/cartSelectors';
-import { setCartProductCount } from '../../slice/cartSlice';
+import { setCartProductCount } from '../../slice/productSlice';
 
 const MIN_COUNT = 1;
 const MAX_COUNT = 99;
@@ -13,16 +13,19 @@ export const useCount = (productId: string) => {
   const product = products.find(p => p.id === productId) as CartProduct;
 
   const { id, count, stock } = product;
+
   const handleIncrement = () => {
     const newCount = count + 1;
     const validCount = newCount > MAX_COUNT ? MAX_COUNT : newCount;
     dispatch(setCartProductCount({ id, count: validCount }));
   };
+
   const handleDecrement = () => {
     const newCount = count - 1;
     const validCount = newCount < MIN_COUNT ? MIN_COUNT : newCount;
     dispatch(setCartProductCount({ id, count: validCount }));
   };
+
   const handleSetCount = (e: ChangeEvent<HTMLInputElement>) => {
     const newCount = +e.target.value;
     const validCount =
@@ -33,5 +36,6 @@ export const useCount = (productId: string) => {
           : newCount;
     dispatch(setCartProductCount({ id, count: validCount }));
   };
+
   return { count, stock, handleSetCount, handleIncrement, handleDecrement };
 };

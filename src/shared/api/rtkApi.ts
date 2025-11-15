@@ -6,8 +6,6 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { USER_LOCALSTORAGE_KEY } from 'shared/consts/localStorage';
 
-console.log('import.meta.env.VITE_API_URL', import.meta.env.VITE_API_URL);
-
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: headers => {

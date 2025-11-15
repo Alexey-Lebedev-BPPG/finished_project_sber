@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { CartList } from '../CartList';
 import { CartAmount } from '../CartAmount';
 import { useAppSelector } from 'shared/lib/hooks/redux';
-import { getCartProductsSelector } from 'entities/Cart';
 import type { FC } from 'react';
+import { getCartProductsSelector } from 'entities/Product';
 
 const CartPage: FC = () => {
   const products = useAppSelector(getCartProductsSelector);

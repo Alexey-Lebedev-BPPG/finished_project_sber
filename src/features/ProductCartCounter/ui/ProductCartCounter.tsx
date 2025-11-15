@@ -1,17 +1,18 @@
 import cls from './ProductCartCounter.module.css';
 import classNames from 'classnames';
-import { useCount } from '../../model/lib/hooks/useProductCartCounter';
 import { useAppDispatch } from 'shared/lib/hooks/redux';
-import { addCartProduct } from 'entities/Cart';
 import type { FC } from 'react';
+import { addCartProduct } from 'entities/Product';
+import { useProductCartCounter } from '../model/lib/hooks/useProductCartCounter';
 
 interface ProductCartCounterProps {
-  product: Product;
+  product: IProduct;
 }
 export const ProductCartCounter: FC<ProductCartCounterProps> = props => {
   const { product } = props;
 
-  const { count, handleCount, handleCountMinus, handleCountPlus } = useCount();
+  const { count, handleCount, handleCountMinus, handleCountPlus } =
+    useProductCartCounter();
 
   const dispatch = useAppDispatch();
   const addProductToCart = (product: CartProduct) =>

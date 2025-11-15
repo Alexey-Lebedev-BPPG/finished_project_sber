@@ -3,20 +3,20 @@ import cls from './Card.module.css';
 import { Price } from 'shared/ui/Price/Price';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
-import {
-  addCartProduct,
-  CartCounter,
-  getCartProductsSelector,
-} from 'entities/Cart';
-import { LikeButton } from '../LikeButton/LikeButton';
 import type { FC } from 'react';
+import { LikeButton } from '../LikeButton/LikeButton';
+import { addCartProduct } from '../../model/slice/productSlice';
+import { getCartProductsSelector } from '../../model/selectors/cartSelectors';
+import { CartCounter } from '../CartCounter/CartCounter';
 
 interface CardProps {
-  product: Product;
+  product: IProduct;
+  isAuth: boolean;
+  userId: string;
 }
 
 export const Card: FC<CardProps> = props => {
-  const { product } = props;
+  const { product, isAuth, userId } = props;
   const { discount, price, name, tags, id, images } = product;
 
   const dispatch = useAppDispatch();
@@ -47,14 +47,16 @@ export const Card: FC<CardProps> = props => {
             </span>
           ))}
       </div>
-      <div
-        className={classNames(
-          cls['card-sticky'],
-          cls['card-sticky_type_top-right'],
-        )}
-      >
-        <LikeButton product={product} />
-      </div>
+      {isAuth && (
+        <div
+          className={classNames(
+            cls['card-sticky'],
+            cls['card-sticky_type_top-right'],
+          )}
+        >
+          <LikeButton product={product} userId={userId} />
+        </div>
+      )}
       <Link className={cls['card-link']} to={`/products/${id}`}>
         <img
           src={images}

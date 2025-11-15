@@ -5,7 +5,7 @@ import { ReviewForm } from '../ReviewForm/ReviewForm';
 import type { FC } from 'react';
 
 interface ReviewListProps {
-  product: Product;
+  product: IProduct;
 }
 export const ReviewList: FC<ReviewListProps> = props => {
   const { product } = props;

@@ -1,8 +1,8 @@
 import cls from './Search.module.css';
-import { useProductsSearchForm } from '../../model/lib/hooks/usePostsSearchForm';
 import type { FC } from 'react';
 import { Icon } from 'shared/ui/Icon/Icon';
 import SearchIcon from 'shared/assets/icons/search.svg';
+import { useProductsSearchForm } from '../model/lib/hooks/useProductsSearchForm';
 
 export const Search: FC = () => {
   const { searchValue, setSearchValue } = useProductsSearchForm();

@@ -4,8 +4,7 @@ import { Logo } from 'features/Logo';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from 'shared/lib/hooks/redux';
 import { getAccessTokenSelector, getUserSelector } from 'entities/User';
-import { Search, useProducts } from 'entities/Product';
-import { getCartProductsSelector } from 'entities/Cart';
+import { getCartProductsSelector, useProducts } from 'entities/Product';
 import { isLiked } from 'shared/lib/helpers/isLiked';
 import {
   getRouteCart,
@@ -18,11 +17,13 @@ import { Icon } from 'shared/ui/Icon/Icon';
 import FavoritesIcon from 'shared/assets/icons/favorites.svg';
 import CartIcon from 'shared/assets/icons/cart.svg';
 import ProfileIcon from 'shared/assets/icons/profile.svg';
+import { Search } from 'features/Search';
 
 export const Header: FC = () => {
-  const { products } = useProducts();
   const user = useAppSelector(getUserSelector);
   const cartProducts = useAppSelector(getCartProductsSelector);
+
+  const { products } = useProducts(user?.id);
 
   const likeCount = products.filter(product =>
     isLiked(product.likes, user?.id),

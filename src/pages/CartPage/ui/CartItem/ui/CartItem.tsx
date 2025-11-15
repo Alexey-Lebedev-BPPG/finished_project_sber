@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import cls from '../../CartPage/CartPage.module.css';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { CartCounter, deleteCartProduct } from 'entities/Cart';
 import { Icon } from 'shared/ui/Icon/Icon';
 import type { FC } from 'react';
+import { CartCounter, deleteCartProduct } from 'entities/Product';
 
 interface CartItemProps {
   product: CartProduct;

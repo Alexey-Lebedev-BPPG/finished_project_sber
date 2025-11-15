@@ -11,11 +11,13 @@ import type { FC } from 'react';
 import {
   CartCounter,
   getCartProductsSelector,
-  ProductCartCounter,
-} from 'entities/Cart';
-import { LikeButton, useGetProductQuery } from 'entities/Product';
+  LikeButton,
+  useGetProductQuery,
+} from 'entities/Product';
 import { Icon } from 'shared/ui/Icon/Icon';
 import { getRouteMain } from 'shared/consts/router';
+import { getAccessTokenSelector, getUserSelector } from 'entities/User';
+import { ProductCartCounter } from 'features/ProductCartCounter';
 
 const ProductPage: FC = () => {
   const location = useLocation();
@@ -23,6 +25,8 @@ const ProductPage: FC = () => {
   const productId = pathname.split(getRouteMain()).at(-1) || '';
 
   const cartProducts = useAppSelector(getCartProductsSelector);
+  const accessToken = useAppSelector(getAccessTokenSelector);
+  const user = useAppSelector(getUserSelector);
 
   const { data: product } = useGetProductQuery({ id: productId });
 
@@ -59,10 +63,10 @@ const ProductPage: FC = () => {
           ) : (
             <ProductCartCounter product={product} />
           )}
-
-          <LikeButton product={product} />
+          {accessToken && (
+            <LikeButton product={product} userId={user?.id || ''} />
+          )}
           <div className={classNames(cls['product-delivery'])}>
-            {/* <img src={truckSVG} alt='truck' /> */}
             <Icon Svg={TruckSVG} />
             <div className={classNames(cls['product-right'])}>
               <h3 className={classNames(cls['product-name'])}>
@@ -82,7 +86,6 @@ const ProductPage: FC = () => {
             </div>
           </div>
           <div className={classNames(cls['product-delivery'])}>
-            {/* <img src={qualitySVG} alt='quality' /> */}
             <Icon Svg={QualitySVG} />
             <div className={classNames(cls['product-right'])}>
               <h3 className={classNames(cls['product-name'])}>

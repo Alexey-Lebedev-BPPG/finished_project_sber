@@ -2,8 +2,6 @@ import cls from './LikeButton.module.css';
 import LikeSvg from 'shared/assets/icons/like.svg';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
-import { useAppSelector } from 'shared/lib/hooks/redux';
-import { getAccessTokenSelector, getUserSelector } from 'entities/User';
 import { Icon } from 'shared/ui/Icon/Icon';
 import {
   useDeleteLikeProductMutation,
@@ -17,25 +15,19 @@ interface IErrorResponse {
 }
 
 interface TLikeButtonProps {
-  product: Product;
+  product: IProduct;
+  userId: string;
 }
 
 export const LikeButton: FC<TLikeButtonProps> = props => {
-  const { product } = props;
-
-  const accessToken = useAppSelector(getAccessTokenSelector);
-  const user = useAppSelector(getUserSelector);
+  const { product, userId } = props;
 
   const [setLike] = useSetLikeProductMutation();
   const [deleteLike] = useDeleteLikeProductMutation();
 
-  const isLike = product?.likes.some(l => l.userId === user?.id);
+  const isLike = product?.likes.some(l => l.userId === userId);
 
   const toggleLike = async () => {
-    if (!accessToken) {
-      toast.warning('Вы не авторизованы');
-      return;
-    }
     let response;
     if (isLike) response = await deleteLike({ id: `${product.id}` });
     else response = await setLike({ id: `${product.id}` });

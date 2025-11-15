@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from 'shared/lib/hooks/useDebounce';
 import { useAppDispatch } from 'shared/lib/hooks/redux';
-import { setSearchText } from '../../slice/productSlice';
+import { setSearchText } from 'entities/Product';
 
 const QUERY_SEARCH_PHRASE = 'q';
 
