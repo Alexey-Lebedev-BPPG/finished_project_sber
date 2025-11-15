@@ -1,1 +1,1 @@
-export { CartPage } from './ui/CartPage';
+export { CartPageAsync as CartPage } from './ui/CartPage/CartPage.async';

@@ -1,21 +1,21 @@
 declare module '*.module.scss' {
-	const value: Record<string, string>;
-	export default value;
+  const value: Record<string, string>;
+  export default value;
 }
 
 declare module '*.module.sass' {
-	const value: Record<string, string>;
-	export default value;
+  const value: Record<string, string>;
+  export default value;
 }
 
 declare module '*.module.css' {
-	const value: Record<string, string>;
-	export default value;
+  const value: Record<string, string>;
+  export default value;
 }
 
 declare module '*.css' {
-	const value: Record<string, string>;
-	export default value;
+  const value: Record<string, string>;
+  export default value;
 }
 
 declare module '*.png';
@@ -28,149 +28,127 @@ declare module '*.gif';
 declare module '*.json';
 
 declare module '*.svg' {
-	import { SVGProps, FunctionComponent } from 'react';
+  import { SVGProps, FunctionComponent } from 'react';
 
-	const SVG: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
-	export default SVG;
+  const SVG: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
+  export default SVG;
 }
 
 interface IResponse<R = unknown> {
-	data: R;
-	status: number;
-	success?: boolean;
+  data: R;
+  status: number;
+  success?: boolean;
 }
 
 interface IAction<P = unknown> {
-	payload?: P;
-	type: string;
+  payload?: P;
+  type: string;
 }
 
 interface IMessage {
-	message: string;
+  message: string;
 }
 
 interface IErrorMessage extends IMessage {
-	error: string;
-	statusCode: number;
+  error: string;
+  statusCode: number;
 }
 
 // ******************8
 
-type ProductsData = {
-	products: Product[];
-	length: number;
-};
+interface Review extends BaseDates {
+  id: string;
+  user: User;
+  text: string;
+  rating: number;
+  product: ReviewProduct;
+}
 
-type Category = {
-	id: number;
-	name: string;
-	slug: string;
-};
+interface Post extends BaseDates {
+  id: string;
+  userId: string;
+  title: string;
+  slug: string;
+  description: string;
+  body: string;
+  images: string;
+  tags: string[];
+  isPublished: boolean;
+  favoritesCount: number;
+}
 
-type Review = BaseDates & {
-	id: string;
-	user: User;
-	text: string;
-	rating: number;
-	product: ReviewProduct;
-};
+interface BaseLike {
+  id: string;
+  userId: string;
+  productId: string;
+}
 
-type Role = 'USER';
+interface Like extends BaseLike {
+  user: LikeUser;
+}
 
-type FavoritePost = {
-	id: string;
-	userId: string;
-	postId: string;
-	post: Post;
-};
+interface ReviewUserLike extends BaseLike {
+  product: ReviewProduct;
+}
 
-type Post = BaseDates & {
-	id: string;
-	userId: string;
-	title: string;
-	slug: string;
-	description: string;
-	body: string;
-	images: string;
-	tags: string[];
-	isPublished: boolean;
-	favoritesCount: number;
-};
+interface BaseUser {
+  id: string;
+  roles: Role[];
+  name: string;
+  email: string;
+  phone: string;
+  avatarPath: string;
+  about: string;
+}
 
-type BaseLike = {
-	id: string;
-	userId: string;
-	productId: string;
-};
+interface User extends BaseUser {
+  likes: ReviewUserLike[];
+  favoritesPost: {
+    id: string;
+    userId: string;
+    postId: string;
+    post: Post;
+  }[];
+}
 
-type Like = BaseLike & {
-	user: LikeUser;
-};
+interface LikeUser extends BaseDates, BaseUser {
+  provider: null;
+  isAdmin: boolean;
+  isBlocked: boolean;
+  password: string;
+}
 
-type ReviewUserLike = BaseLike & {
-	product: ReviewProduct;
-};
+interface BaseProduct extends BaseDates {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  images: string;
+  slug: string;
+  discount: number;
+  isPublished: boolean;
+  stock: number;
+  tags: string[];
+}
 
-type BaseUser = {
-	id: string;
-	roles: Role[];
-	name: string;
-	email: string;
-	phone: string;
-	avatarPath: string;
-	about: string;
-};
+interface Product extends BaseProduct {
+  reviews: Review[];
+  category: { id: number; name: string; slug: string };
+  user: User;
+  likes: Like[];
+}
 
-type User = BaseUser & {
-	likes: ReviewUserLike[];
-	favoritesPost: FavoritePost[];
-};
+interface ReviewProduct extends BaseProduct {
+  categoryId: number;
+  userId: string;
+  wight: string;
+}
 
-type LikeUser = BaseDates &
-	BaseUser & {
-		provider: null;
-		isAdmin: boolean;
-		isBlocked: boolean;
-		password: string;
-	};
+interface CartProduct extends Product {
+  count: number;
+}
 
-type BaseProduct = BaseDates & {
-	id: string;
-	name: string;
-	description: string;
-	price: number;
-	images: string;
-	slug: string;
-	discount: number;
-	isPublished: boolean;
-	stock: number;
-	tags: string[];
-};
-
-type Product = BaseProduct & {
-	reviews: Review[];
-	category: Category;
-	user: User;
-	likes: Like[];
-};
-
-type ReviewProduct = BaseProduct & {
-	categoryId: number;
-	userId: string;
-	wight: string;
-};
-
-type CartProduct = Product & {
-	count: number;
-};
-
-type BaseDates = {
-	createdAt: string;
-	updatedAt?: string;
-};
-
-type Sort = 'high-price' | 'low-price' | 'newest' | 'oldest';
-
-type Token = {
-	accessToken: string;
-};
+interface BaseDates {
+  createdAt: string;
+  updatedAt?: string;
+}

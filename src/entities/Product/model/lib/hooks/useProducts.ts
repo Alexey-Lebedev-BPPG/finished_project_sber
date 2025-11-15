@@ -4,37 +4,31 @@ import { getProductsSelector } from '../../selectors/productSelectors';
 import { useGetProductsQuery } from '../../../api/productApi';
 import { getUserSelector } from 'entities/User';
 import { isLiked } from 'shared/lib/helpers/isLiked';
+import { getRouteFavorites } from 'shared/consts/router';
 
 export const useProducts = () => {
-	const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-	const { searchText, page, perPage, sort } =
-		useAppSelector(getProductsSelector);
+  const { searchText, page, perPage, sort } =
+    useAppSelector(getProductsSelector);
 
-	const isFavoritesPage = pathname === '/favorites';
-	const { isLoading, isError, error, data, isFetching } = useGetProductsQuery({
-		searchText,
-		sort,
-		page,
-		perPage: isFavoritesPage ? undefined : perPage,
-	});
+  const isFavoritesPage = pathname === getRouteFavorites();
+  const { isLoading, isError, error, data, isFetching } = useGetProductsQuery({
+    searchText,
+    sort,
+    page,
+    perPage: isFavoritesPage ? undefined : perPage,
+  });
 
-	let products = data?.products || [];
+  let products = data?.products || [];
 
-	const user = useAppSelector(getUserSelector);
+  const user = useAppSelector(getUserSelector);
 
-	if (isFavoritesPage) {
-		products = products.filter((product) => isLiked(product.likes, user?.id));
-	}
+  if (isFavoritesPage) {
+    products = products.filter(product => isLiked(product.likes, user?.id));
+  }
 
-	const productsCount = data?.length || 0;
+  const productsCount = data?.length || 0;
 
-	return {
-		products,
-		isLoading,
-		isError,
-		isFetching,
-		error,
-		productsCount,
-	};
+  return { products, isLoading, isError, isFetching, error, productsCount };
 };

@@ -1,27 +1,27 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { ProductSchema } from '../types/productSchema';
+import type { ISort, ProductSchema } from '../types/productSchema';
 
 const initialState: ProductSchema = {
-	searchText: '',
-	sort: 'newest',
-	page: 1,
-	perPage: 6,
+  searchText: '',
+  sort: 'newest',
+  page: 1,
+  perPage: 6,
 };
 
 export const productSlice = createSlice({
-	initialState,
-	name: 'product',
-	reducers: {
-		setSort(state, { payload }: PayloadAction<Sort>) {
-			state.sort = payload;
-		},
-		setSearchText(state, { payload }: PayloadAction<string>) {
-			state.searchText = payload;
-		},
-		setPage(state, { payload }: PayloadAction<number>) {
-			state.page = payload;
-		},
-	},
+  initialState,
+  name: 'product',
+  reducers: {
+    setSort(state, { payload }: PayloadAction<ISort>) {
+      state.sort = payload;
+    },
+    setSearchText(state, { payload }: PayloadAction<string>) {
+      state.searchText = payload;
+    },
+    setPage(state, { payload }: PayloadAction<number>) {
+      state.page = payload;
+    },
+  },
 });
 
 export const { setPage, setSearchText, setSort } = productSlice.actions;

@@ -3,30 +3,30 @@ import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import TruckSVG from 'shared/assets/icons/truck.svg';
 import QualitySVG from 'shared/assets/icons/quality.svg';
-import { Rating } from 'shared/ui/Rating';
-import { ButtonBack } from 'shared/ui/ButtonBack';
-import { LikeButton } from 'shared/ui/LikeButton';
-import { ReviewList } from 'widgets/ReviewList/ui/ReviewList';
-import { ProductCartCounter } from 'shared/ui/ProductCartCounter/ui/ProductCartCounter';
-import { CartCounter } from 'shared/ui/CartCounter';
+import { Rating } from 'shared/ui/Rating/Rating';
+import { ButtonBack } from 'features/ButtonBack';
+import { ReviewList } from 'widgets/ReviewList/ui/ReviewList/ReviewList';
 import { useAppSelector } from 'shared/lib/hooks/redux';
 import type { FC } from 'react';
-import { getCartProductsSelector } from 'entities/Cart';
-import { useGetProductQuery } from 'entities/Product';
-import { Icon } from 'shared/ui/Icon';
+import {
+  CartCounter,
+  getCartProductsSelector,
+  ProductCartCounter,
+} from 'entities/Cart';
+import { LikeButton, useGetProductQuery } from 'entities/Product';
+import { Icon } from 'shared/ui/Icon/Icon';
+import { getRouteMain } from 'shared/consts/router';
 
-export const ProductPage: FC = () => {
+const ProductPage: FC = () => {
   const location = useLocation();
   const { pathname } = location;
-  const productId = pathname.split('/').at(-1) || '';
+  const productId = pathname.split(getRouteMain()).at(-1) || '';
 
   const cartProducts = useAppSelector(getCartProductsSelector);
 
   const { data: product } = useGetProductQuery({ id: productId });
 
-  if (!product) {
-    return <></>;
-  }
+  if (!product) return null;
 
   const { id, name, images, description, price, discount } = product;
 
@@ -133,3 +133,5 @@ export const ProductPage: FC = () => {
     </>
   );
 };
+
+export default ProductPage;

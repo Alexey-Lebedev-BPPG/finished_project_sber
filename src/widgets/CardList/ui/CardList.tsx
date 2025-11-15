@@ -1,14 +1,17 @@
-import { Card } from 'shared/ui/Card';
+import { Card } from 'entities/Product';
 import cls from './CardList.module.css';
+import type { FC } from 'react';
 
-type CardListProps = {
+interface CardListProps {
   title: string;
   products: Product[];
-};
-export const CardList = ({ title, products }: CardListProps) => {
-  if (!products.length) {
+}
+
+export const CardList: FC<CardListProps> = props => {
+  const { products, title } = props;
+
+  if (products.length < 1)
     return <h1 className={cls['header-title']}>Товар не найден</h1>;
-  }
 
   return (
     <div className={cls['card-list']}>

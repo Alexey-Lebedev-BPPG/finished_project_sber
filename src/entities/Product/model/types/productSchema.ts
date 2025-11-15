@@ -1,6 +1,8 @@
+export type ISort = 'high-price' | 'low-price' | 'newest' | 'oldest';
+
 export interface ProductSchema {
-	sort: Sort;
-	page: number;
-	perPage: number;
-	searchText: string;
+  sort: ISort;
+  page: number;
+  perPage: number;
+  searchText: string;
 }

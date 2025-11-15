@@ -1,26 +1,30 @@
 import { rtkApi } from 'shared/api/rtkApi';
 import urls from 'shared/consts/urls';
-import type { SignUpFormValues } from 'widgets/SignUpForm/utils/types';
 
-type SignUpResponse = {
-	user: Pick<User, 'id' | 'email'>;
-	accessToken: Token['accessToken'];
-};
+interface SignUpResponse {
+  user: Pick<User, 'id' | 'email'>;
+  accessToken: string;
+}
 
-type SignInResponse = {
-	user: User;
-	accessToken: Token['accessToken'];
-};
+interface SignInResponse {
+  user: User;
+  accessToken: string;
+}
+
+interface AuthArgsResponse {
+  email: string;
+  password: string;
+}
 
 export const userApi = rtkApi.injectEndpoints({
-	endpoints: (builder) => ({
-		signUp: builder.mutation<SignUpResponse, SignUpFormValues>({
-			query: (body) => ({ url: urls.auth.register, method: 'POST', body }),
-		}),
-		signIn: builder.mutation<SignInResponse, SignUpFormValues>({
-			query: (body) => ({ url: urls.auth.login, method: 'POST', body }),
-		}),
-	}),
+  endpoints: builder => ({
+    signUp: builder.mutation<SignUpResponse, AuthArgsResponse>({
+      query: body => ({ url: urls.auth.register, method: 'POST', body }),
+    }),
+    signIn: builder.mutation<SignInResponse, AuthArgsResponse>({
+      query: body => ({ url: urls.auth.login, method: 'POST', body }),
+    }),
+  }),
 });
 
 export const { useSignInMutation, useSignUpMutation } = userApi;
