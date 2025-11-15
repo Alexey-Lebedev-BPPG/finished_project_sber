@@ -1,16 +1,14 @@
 import type { FC } from 'react';
-import {
-  Avatar,
-  Box,
-  Container,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import LoadingButton from '@mui/lab/LoadingButton';
+import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -111,7 +109,7 @@ export const SignInForm: FC = () => {
               />
             )}
           />
-          <LoadingButton
+          <Button
             type='submit'
             disabled={isSubmitted && (!isValid || isSubmitting)}
             loading={isSubmitting}
@@ -120,7 +118,7 @@ export const SignInForm: FC = () => {
             sx={{ mt: 3, mb: 2 }}
           >
             Sign IN
-          </LoadingButton>
+          </Button>
           <Box display='flex' justifyContent='center' flexGrow={1}>
             <Link component={RouterLink} to={getRouteSignUp()}>
               SIGN UP

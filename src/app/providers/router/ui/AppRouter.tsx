@@ -12,11 +12,18 @@ export const AppRouter: FC = () => {
   const routes: RouteObject[] = Object.values(routeConfig).map(route => {
     const { children, element, path } = route;
 
-    const routeObject: RouteObject = { element, path };
+    const routeObject: RouteObject = {
+      element: route.authOnly ? (
+        <RequireAuth>{element}</RequireAuth>
+      ) : (
+        route.element
+      ),
+      path,
+    };
 
     if (Array.isArray(children))
       routeObject.children = children.map(child => ({
-        element: route.authOnly ? (
+        element: child.authOnly ? (
           <RequireAuth>{child.element}</RequireAuth>
         ) : (
           child.element

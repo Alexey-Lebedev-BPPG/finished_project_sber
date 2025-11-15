@@ -2,15 +2,14 @@ import classNames from 'classnames';
 import cls from './Header.module.css';
 import { Logo } from 'features/Logo';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from 'shared/lib/hooks/redux';
-import { getAccessTokenSelector, getUserSelector } from 'entities/User';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
+import { getAccessTokenSelector, getUserSelector, logout } from 'entities/User';
 import { getCartProductsSelector, useProducts } from 'entities/Product';
 import { isLiked } from 'shared/lib/helpers/isLiked';
 import {
   getRouteCart,
   getRouteFavorites,
   getRouteProfile,
-  getRouteSignIn,
 } from 'shared/consts/router';
 import type { FC } from 'react';
 import { Icon } from 'shared/ui/Icon/Icon';
@@ -18,8 +17,11 @@ import FavoritesIcon from 'shared/assets/icons/favorites.svg';
 import CartIcon from 'shared/assets/icons/cart.svg';
 import ProfileIcon from 'shared/assets/icons/profile.svg';
 import { Search } from 'features/Search';
+import Box from '@mui/material/Box';
 
 export const Header: FC = () => {
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector(getUserSelector);
   const cartProducts = useAppSelector(getCartProductsSelector);
 
@@ -30,6 +32,8 @@ export const Header: FC = () => {
   ).length;
 
   const accessToken = useAppSelector(getAccessTokenSelector);
+
+  const handleLogout = () => dispatch(logout());
 
   return (
     <header className={cls.header}>
@@ -51,20 +55,20 @@ export const Header: FC = () => {
             </span>
           </Link>
           {accessToken && (
-            <>
+            <Box
+              alignItems='center'
+              gap='8px'
+              display='flex'
+              style={{ cursor: 'pointer' }}
+            >
               <Link
                 className={cls['header-icons-menu-item']}
                 to={getRouteProfile()}
               >
                 <Icon Svg={ProfileIcon} />
               </Link>
-              <Link
-                className={cls['header-icons-menu-item']}
-                to={getRouteSignIn()}
-              >
-                Выйти
-              </Link>
-            </>
+              <span onClick={handleLogout}>Выйти</span>
+            </Box>
           )}
         </div>
       </div>

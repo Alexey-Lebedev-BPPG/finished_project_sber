@@ -1,11 +1,11 @@
 import { getAccessTokenSelector } from 'entities/User';
-import { type FC, type JSX } from 'react';
+import { type FC, type ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { getRouteSignIn } from 'shared/consts/router';
 import { useAppSelector } from 'shared/lib/hooks/redux';
 
 interface RequireAuthProps {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const RequireAuth: FC<RequireAuthProps> = props => {

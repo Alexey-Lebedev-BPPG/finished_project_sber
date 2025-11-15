@@ -1,4 +1,6 @@
-import { Alert, CircularProgress, Stack } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import { useRef, type FC } from 'react';
 import { useLoadMore } from '../model/lib/hooks/useLoadMore';
 

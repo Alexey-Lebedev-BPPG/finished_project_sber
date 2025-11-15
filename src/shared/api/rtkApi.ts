@@ -4,13 +4,15 @@ import {
   type BaseQueryApi,
   type FetchArgs,
 } from '@reduxjs/toolkit/query/react';
-import { USER_LOCALSTORAGE_KEY } from 'shared/consts/localStorage';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: headers => {
-    const token = localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
-    if (token) headers.set('Authorization', token);
+    const allSessionStorage = sessionStorage.getItem('persist:root') || '';
+    const persist = JSON.parse(allSessionStorage);
+    const user = JSON.parse(persist.user);
+
+    if (user?.accessToken) headers.set('Authorization', user.accessToken);
 
     return headers;
   },

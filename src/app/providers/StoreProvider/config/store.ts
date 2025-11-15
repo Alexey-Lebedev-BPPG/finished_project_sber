@@ -1,8 +1,23 @@
-import { configureStore, type ReducersMapObject } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  type ReducersMapObject,
+} from '@reduxjs/toolkit';
 import type { StateSchema } from './stateSchema';
 import { rtkApi } from 'shared/api/rtkApi';
 import { userReducer } from 'entities/User';
 import { productReducer } from 'entities/Product';
+import sessionStorage from 'redux-persist/lib/storage/session';
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 export const createReduxStore = (initialState?: StateSchema) => {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -12,13 +27,31 @@ export const createReduxStore = (initialState?: StateSchema) => {
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
+  const persistConfig = {
+    key: 'root',
+    storage: sessionStorage,
+    // if need
+    // whitelist: ['user'],
+  };
+
+  const persistedReducer = persistReducer(
+    persistConfig,
+    combineReducers(rootReducers),
+  );
+
   const store = configureStore({
     devTools: import.meta.env.NODE_ENV !== 'production',
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(rtkApi.middleware),
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(rtkApi.middleware),
     preloadedState: initialState,
-    reducer: rootReducers,
+    reducer: persistedReducer as unknown as ReducersMapObject<StateSchema>,
   });
 
-  return store;
+  const persistor = persistStore(store);
+
+  return { store, persistor };
 };
