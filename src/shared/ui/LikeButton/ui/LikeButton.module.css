@@ -1,4 +1,4 @@
-.card__favorite {
+.card-favorite {
 	display: flex;
 	padding: 0;
 	background: none;
@@ -6,18 +6,18 @@
 	cursor: pointer;
 }
 
-.card__favorite svg {
+.card-favorite svg {
 	fill: #ffffff;
 }
 
-.card__favorite svg path:first-child {
+.card-favorite svg path:first-child {
 	fill: #7b8e98;
 }
 
-.card__favorite_is-active svg {
+.card-favorite_is-active svg {
 	fill: #f44336;
 }
 
-.card__favorite_is-active svg path:first-child {
+.card-favorite_is-active svg path:first-child {
 	fill: #f44336;
 }

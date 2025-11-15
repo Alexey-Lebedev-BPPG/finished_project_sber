@@ -1,35 +1,40 @@
-import s from './ProductCartCounter.module.css';
+import cls from './ProductCartCounter.module.css';
 import classNames from 'classnames';
 import { useCount } from '../hooks/useCount';
-import { useAddToCart } from '../../../hooks/useAddToCart';
-import { Product } from '../../../types/global';
+import { useAppDispatch } from 'shared/lib/hooks/redux';
+import { addCartProduct } from 'entities/Cart';
 
 type ProductCartCounterProps = {
 	product: Product;
 };
 export const ProductCartCounter = ({ product }: ProductCartCounterProps) => {
 	const { count, handleCount, handleCountMinus, handleCountPlus } = useCount();
-	const { addProductToCart } = useAddToCart();
+
+	const dispatch = useAppDispatch();
+	const addProductToCart = (product: CartProduct) =>
+		dispatch(addCartProduct(product));
 
 	return (
-		<div className={classNames('product__btn-wrap')}>
-			<div className={s['button-count']}>
-				<button className={s['button-count__minus']} onClick={handleCountMinus}>
+		<div className={classNames('product-btn-wrap')}>
+			<div className={cls['button-count']}>
+				<button
+					className={cls['button-count-minus']}
+					onClick={handleCountMinus}>
 					-
 				</button>
 				<input
 					type='number'
-					className={s['button-count__num']}
+					className={cls['button-count-num']}
 					value={count}
 					onChange={handleCount}
 				/>
-				<button className={s['button-count__plus']} onClick={handleCountPlus}>
+				<button className={cls['button-count-plus']} onClick={handleCountPlus}>
 					+
 				</button>
 			</div>
 			<button
 				onClick={() => addProductToCart({ ...product, count })}
-				className={classNames(s['button'], s['button_type_primary'])}>
+				className={classNames(cls['button'], cls['button_type_primary'])}>
 				В корзину
 			</button>
 		</div>

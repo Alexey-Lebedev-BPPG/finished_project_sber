@@ -1,5 +1,5 @@
 import { useCount } from '../hooks/useCount';
-import s from './CartCounter.module.css';
+import cls from './CartCounter.module.css';
 import classNames from 'classnames';
 
 type TCartCounter = {
@@ -11,21 +11,21 @@ export const CartCounter = ({ productId }: TCartCounter) => {
 
 	return (
 		<>
-			<div className={classNames(s['button-count'])}>
+			<div className={classNames(cls['button-count'])}>
 				<button
 					onClick={handleDecrement}
-					className={classNames(s['button-count__minus'])}>
+					className={classNames(cls['button-count-minus'])}>
 					-
 				</button>
 				<input
 					onChange={handleSetCount}
 					type='number'
-					className={classNames(s['button-count__num'])}
+					className={classNames(cls['button-count-num'])}
 					value={count}
 				/>
 				<button
 					onClick={handleIncrement}
-					className={classNames(s['button-count__plus'])}
+					className={classNames(cls['button-count-plus'])}
 					disabled={count >= stock}>
 					+
 				</button>

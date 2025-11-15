@@ -1,25 +1,24 @@
 import classNames from 'classnames';
-import s from './ReviewList.module.css';
-import { Rating } from '../../../shared/ui/Rating';
+import cls from './ReviewList.module.css';
+import { Rating } from 'shared/ui/Rating';
 import { ReviewForm } from './ReviewForm/ReviewForm';
-import { Product } from '../../../shared/types/global';
 
 type ReviewListProps = {
 	product: Product;
 };
 export const ReviewList = ({ product }: ReviewListProps) => {
 	return (
-		<div className={classNames(s['product__reviews'])}>
+		<div className={classNames(cls['product-reviews'])}>
 			{product.reviews.map((review) => (
-				<div className={s['review']} key={review.id}>
-					<div className={s['review__header']}>
-						<div className={s['review__name']}>{review.user.name}</div>
-						<div className={s['review__date']}>
+				<div className={cls['review']} key={review.id}>
+					<div className={cls['review-header']}>
+						<div className={cls['review-name']}>{review.user.name}</div>
+						<div className={cls['review-date']}>
 							{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 						</div>
 					</div>
 					<Rating rating={review.rating} />
-					<p className={s['review__text']}>{review.text}</p>
+					<p className={cls['review-text']}>{review.text}</p>
 				</div>
 			))}
 

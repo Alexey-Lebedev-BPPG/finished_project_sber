@@ -1,10 +1,6 @@
-import { RefObject, useCallback, useLayoutEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/utils';
-import { useProducts } from '../../../store/hooks/useProducts';
-import {
-	productsActions,
-	productsSelectors,
-} from '../../../store/slices/products';
+import { getPageSelector, setPage, useProducts } from 'entities/Product';
+import { type RefObject, useCallback, useLayoutEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
 
 interface UseLoadMoreParams {
 	ref: RefObject<HTMLDivElement | null>;
@@ -14,13 +10,13 @@ export const useLoadMore = ({ ref }: UseLoadMoreParams) => {
 
 	const { products, isFetching, productsCount } = useProducts();
 
-	const page = useAppSelector(productsSelectors.getPage);
+	const page = useAppSelector(getPageSelector);
 
 	const isEndOfList = products.length >= productsCount;
 
 	const fetchMoreProducts = useCallback(() => {
 		if (!isEndOfList && !isFetching) {
-			dispatch(productsActions.setPage(page + 1));
+			dispatch(setPage(page + 1));
 		}
 	}, [isEndOfList, isFetching, page, dispatch]);
 

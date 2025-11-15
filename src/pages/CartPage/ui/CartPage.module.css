@@ -2,6 +2,14 @@
 	padding: 20px 0;
 }
 
+.header-title {
+	margin-top: 0;
+	margin-bottom: 20px;
+	font-weight: 800;
+	font-size: 32px;
+	line-height: 1.5;
+}
+
 .container {
 	width: 95%;
 	max-width: 1024px;
@@ -48,21 +56,21 @@
 	border-bottom: none;
 }
 
-.cart-item__desc {
+.cart-item-desc {
 	display: flex;
 	flex-grow: 1;
 	align-items: center;
 	column-gap: 16px;
 }
 
-.cart-item__image {
+.cart-item-image {
 	flex-shrink: 0;
 	width: 64px;
 	height: 64px;
 	object-fit: contain;
 }
 
-.cart-item__title {
+.cart-item-title {
 	width: 100%;
 	margin: 0;
 	color: currentcolor;
@@ -72,11 +80,11 @@
 	text-decoration: none;
 }
 
-.cart-item__price {
+.cart-item-price {
 	text-align: right;
 }
 
-.cart-item__weight {
+.cart-item-weight {
 	margin: 0;
 	color: #7b8e98;
 	font-weight: 400;
@@ -84,14 +92,14 @@
 	line-height: 14px;
 }
 
-.cart-item__bnt-trash {
+.cart-item-bnt-trash {
 	padding: 0;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 }
 
-.cart-item__bnt-trash:hover path {
+.cart-item-bnt-trash:hover path {
 	fill: red;
 }
 
@@ -168,53 +176,53 @@ input[type='number']:focus {
 		0 2px 16px rgb(96 97 112 / 16%);
 }
 
-.cart-amount__title {
+.cart-amount-title {
 	margin: 0;
 	font-weight: 800;
 	font-size: 20px;
 	line-height: 24px;
 }
 
-.cart-amount__table {
+.cart-amount-table {
 	display: grid;
 	row-gap: 16px;
 }
 
-.cart-amount__table-row {
+.cart-amount-table-row {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.cart-amount__table-title {
+.cart-amount-table-title {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20px;
 }
 
-.cart-amount__table-value {
+.cart-amount-table-value {
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 20px;
 }
 
-.cart-amount__table-value-discount {
+.cart-amount-table-value-discount {
 	color: #f44336;
 }
 
-.cart-amount__total-cost {
+.cart-amount-total-cost {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.cart-amount__total-cost-title {
+.cart-amount-total-cost-title {
 	font-weight: 800;
 	font-size: 14px;
 	line-height: 20px;
 }
 
-.cart-amount__total-cost-value {
+.cart-amount-total-cost-value {
 	font-weight: 800;
 	font-size: 20px;
 	line-height: 24px;

@@ -1,11 +1,10 @@
-import { ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import { useSort } from '../hooks/useSort';
-import { Sort as TSort } from '../../../types/global';
 
 export const Sort = () => {
 	const { sort, setSort, sortParams } = useSort();
 	const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-		const newSort = e.target.value as TSort;
+		const newSort = e.target.value as Sort;
 		setSort(newSort);
 	};
 	return (

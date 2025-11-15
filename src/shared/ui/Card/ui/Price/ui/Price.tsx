@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import s from './Price.module.css';
+import cls from './Price.module.css';
 
 type TPriceProps = {
 	price: number;
@@ -8,11 +8,11 @@ type TPriceProps = {
 
 export const Price = ({ price, discountPrice }: TPriceProps) => {
 	return (
-		<div className={classNames(s['price-small'], s['price-wrap'])}>
-			<span className={classNames(s['price_old'], s['price_left'])}>
+		<div className={classNames(cls['price-small'], cls['price-wrap'])}>
+			<span className={classNames(cls['price_old'], cls['price_left'])}>
 				{`${price}₽`}
 			</span>
-			<span className={classNames(s['price_discount'], s['price'])}>
+			<span className={classNames(cls['price_discount'], cls['price'])}>
 				{`${price - discountPrice}₽`}
 			</span>
 		</div>

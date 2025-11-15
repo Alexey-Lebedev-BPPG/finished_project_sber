@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDebounce } from '../../../hooks/useDebounce';
-import { useAppDispatch } from '../../../store/utils';
-import { productsActions } from '../../../store/slices/products';
+import { useDebounce } from 'shared/lib/hooks/useDebounce';
+import { useAppDispatch } from 'shared/lib/hooks/redux';
+import { setSearchText } from 'entities/Product';
 
 const QUERY_SEARCH_PHRASE = 'q';
 
@@ -21,7 +21,7 @@ export const useProductsSearchForm = () => {
 	const optimizedValue = useDebounce(searchValue, 500);
 
 	useEffect(() => {
-		dispatch(productsActions.setSearchText(optimizedValue));
+		dispatch(setSearchText(optimizedValue));
 	}, [optimizedValue, dispatch]);
 
 	useEffect(() => {

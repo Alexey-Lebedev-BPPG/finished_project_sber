@@ -1,6 +1,5 @@
-import { CartProduct } from '../../../../../shared/types/global';
 import { CartItem } from '../../CartItem';
-import s from '../../CartPage.module.css';
+import cls from '../../CartPage.module.css';
 import classNames from 'classnames';
 
 type CartListProps = {
@@ -8,7 +7,7 @@ type CartListProps = {
 };
 export const CartList = ({ products }: CartListProps) => {
 	return (
-		<div className={classNames(s['cart-list'])}>
+		<div className={classNames(cls['cart-list'])}>
 			{products.map((p) => (
 				<CartItem product={p} key={p.id} />
 			))}

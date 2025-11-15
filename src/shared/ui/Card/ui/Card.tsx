@@ -1,55 +1,57 @@
 import classNames from 'classnames';
-import s from './Card.module.css';
+import cls from './Card.module.css';
 import { Price } from './Price/ui/Price';
 import { Link } from 'react-router-dom';
 import { LikeButton } from '../../LikeButton';
-import { useAppSelector } from '../../../store/utils';
-import { cartSelectors } from '../../../store/slices/cart';
-import { useAddToCart } from '../../../hooks/useAddToCart';
 import { CartCounter } from '../../CartCounter';
-import { Product } from '../../../types/global';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
+import { addCartProduct, getCartProductsSelector } from 'entities/Cart';
 
 type CardProps = {
 	product: Product;
 };
 export const Card = ({ product }: CardProps) => {
 	const { discount, price, name, tags, id, images } = product;
-	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
+	const cartProducts = useAppSelector(getCartProductsSelector);
 	const isProductInCart = cartProducts.some((p) => p.id === id);
-	const { addProductToCart } = useAddToCart();
+	const dispatch = useAppDispatch();
+	const addProductToCart = (product: CartProduct) =>
+		dispatch(addCartProduct(product));
 
 	return (
-		<article className={s['card']}>
+		<article className={cls['card']}>
 			<div
 				className={classNames(
-					s['card__sticky'],
-					s['card__sticky_type_top-left']
+					cls['card-sticky'],
+					cls['card-sticky_type_top-left']
 				)}>
-				<span className={s['card__discount']}>{discount}</span>
+				<span className={cls['card-discount']}>{discount}</span>
 				{tags.length > 0 &&
 					tags.map((t) => (
-						<span key={t} className={classNames(s['tag'], s['tag_type_new'])}>
+						<span
+							key={t}
+							className={classNames(cls['tag'], cls['tag_type_new'])}>
 							{t}
 						</span>
 					))}
 			</div>
 			<div
 				className={classNames(
-					s['card__sticky'],
-					s['card__sticky_type_top-right']
+					cls['card-sticky'],
+					cls['card-sticky_type_top-right']
 				)}>
 				<LikeButton product={product} />
 			</div>
-			<Link className={s['card__link']} to={`/products/${id}`}>
+			<Link className={cls['card-link']} to={`/products/${id}`}>
 				<img
 					src={images}
 					alt={name}
-					className={s['card__image']}
+					className={cls['card-image']}
 					loading='lazy'
 				/>
-				<div className={s['card__desc']}>
+				<div className={cls['card-desc']}>
 					<Price price={price} discountPrice={discount} />
-					<h3 className={s['card__name']}>{name}</h3>
+					<h3 className={cls['card-name']}>{name}</h3>
 				</div>
 			</Link>
 			{isProductInCart ? (
@@ -59,9 +61,9 @@ export const Card = ({ product }: CardProps) => {
 					onClick={() => addProductToCart({ ...product, count: 1 })}
 					disabled={isProductInCart}
 					className={classNames(
-						s['card__cart'],
-						s['card__btn'],
-						s['card__btn_type_primary']
+						cls['card-cart'],
+						cls['card-btn'],
+						cls['card-btn_type_primary']
 					)}>
 					В корзину
 				</button>

@@ -1,26 +1,26 @@
-import s from './CartPage.module.css';
+import cls from './CartPage.module.css';
 import classNames from 'classnames';
-import { useAppSelector } from '../../../shared/store/utils';
-import { cartSelectors } from '../../../shared/store/slices/cart';
 import { CartList } from './CartList';
 import { CartAmount } from './CartAmount';
+import { useAppSelector } from 'shared/lib/hooks/redux';
+import { getCartProductsSelector } from 'entities/Cart';
 
 export const CartPage = () => {
-	const products = useAppSelector(cartSelectors.getCartProducts);
+  const products = useAppSelector(getCartProductsSelector);
 
-	if (!products.length) {
-		return <h1 className='header-title'>Товаров нет корзине</h1>;
-	}
+  if (!products.length) {
+    return <h1 className={cls['header-title']}>Товаров нет корзине</h1>;
+  }
 
-	return (
-		<div className={classNames(s['content'], s['container'])}>
-			<div className={classNames(s['content-cart'])}>
-				<div className={classNames(s['cart-title'])}>
-					<span>{products.length}</span> в корзине
-				</div>
-				<CartList products={products} />
-				<CartAmount products={products} />
-			</div>
-		</div>
-	);
+  return (
+    <div className={classNames(cls['content'], cls['container'])}>
+      <div className={classNames(cls['content-cart'])}>
+        <div className={classNames(cls['cart-title'])}>
+          <span>{products.length}</span> в корзине
+        </div>
+        <CartList products={products} />
+        <CartAmount products={products} />
+      </div>
+    </div>
+  );
 };

@@ -1,4 +1,4 @@
-import s from './Search.module.css';
+import cls from './Search.module.css';
 import { useProductsSearchForm } from '../hooks/usePostsSearchForm';
 
 export const Search = () => {
@@ -9,16 +9,16 @@ export const Search = () => {
 	};
 
 	return (
-		<form className={s['search']}>
+		<form className={cls['search']}>
 			<input
 				type='text'
-				className={s['search__input']}
+				className={cls['search-input']}
 				placeholder='Поиск'
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
 			/>
 			{searchValue.length > 0 && (
-				<button className={s['search__btn']} onClick={handleClearSearchText}>
+				<button className={cls['search-btn']} onClick={handleClearSearchText}>
 					<svg
 						width='24'
 						height='24'

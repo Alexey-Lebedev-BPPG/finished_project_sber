@@ -1,22 +1,22 @@
-import s from './LikeButton.module.css';
-import { ReactComponent as LikeSvg } from './../../../assets/icons/like.svg';
+import cls from './LikeButton.module.css';
+import LikeSvg from 'shared/assets/icons/like.svg';
 import classNames from 'classnames';
-import { useAppSelector } from '../../../store/utils';
-import { userSelectors } from '../../../store/slices/user';
-import {
-	useSetLikeProductMutation,
-	useDeleteLikeProductMutation,
-	IErrorResponse,
-} from '../../../store/api/productsApi';
 import { toast } from 'react-toastify';
-import { Product } from '../../../types/global';
+import { useAppSelector } from 'shared/lib/hooks/redux';
+import { getAccessTokenSelector, getUserSelector } from 'entities/User';
+import {
+	useDeleteLikeProductMutation,
+	useSetLikeProductMutation,
+} from 'entities/Product';
+import type { IErrorResponse } from 'entities/Product/api/productApi';
+import { Icon } from 'shared/ui/Icon';
 
 type TLikeButtonProps = {
 	product: Product;
 };
 export const LikeButton = ({ product }: TLikeButtonProps) => {
-	const accessToken = useAppSelector(userSelectors.getAccessToken);
-	const user = useAppSelector(userSelectors.getUser);
+	const accessToken = useAppSelector(getAccessTokenSelector);
+	const user = useAppSelector(getUserSelector);
 
 	const [setLike] = useSetLikeProductMutation();
 	const [deleteLike] = useDeleteLikeProductMutation();
@@ -43,11 +43,11 @@ export const LikeButton = ({ product }: TLikeButtonProps) => {
 
 	return (
 		<button
-			className={classNames(s['card__favorite'], {
-				[s['card__favorite_is-active']]: isLike,
+			className={classNames(cls['card-favorite'], {
+				[cls['card-favorite_is-active']]: isLike,
 			})}
 			onClick={toggleLike}>
-			<LikeSvg />
+			<Icon Svg={LikeSvg} />
 		</button>
 	);
 };

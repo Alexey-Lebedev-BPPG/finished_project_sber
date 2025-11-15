@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import {
 	Avatar,
 	Box,
@@ -8,18 +8,17 @@ import {
 	Typography,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { toast } from 'react-toastify';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { SignInFormValues } from '../utils/types';
+import type { SignInFormValues } from '../utils/types';
 import { signInFormSchema } from '../utils/validator';
-import { useSignInMutation } from '../../../shared/store/api/authApi';
-import { userActions } from '../../../shared/store/slices/user';
-import { getMessageFromError } from '../../../shared/utils';
+import { setAccessToken, setUser, useSignInMutation } from 'entities/User';
+import { getMessageFromError } from 'shared/lib/helpers/getMessageFromError';
 
 export const SignInForm: FC = () => {
 	const dispatch = useDispatch();
@@ -53,10 +52,8 @@ export const SignInForm: FC = () => {
 			// с помощью конструкции try...catch. В этом случае нам так удобней
 			const response = await signInRequestFn(values).unwrap();
 
-			dispatch(userActions.setUser(response.user));
-			dispatch(
-				userActions.setAccessToken({ accessToken: response.accessToken })
-			);
+			dispatch(setUser(response.user));
+			dispatch(setAccessToken(response.accessToken));
 
 			// Выводим уведомление, что пользователь успешно зарегался
 			// Есть куча библиотек для отображения "Тостеров". Мы используем

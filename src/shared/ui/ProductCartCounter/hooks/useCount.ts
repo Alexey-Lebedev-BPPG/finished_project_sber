@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 
 const MIN_COUNT = 1;
 const MAX_COUNT = 99;
@@ -12,8 +12,8 @@ export const useCount = () => {
 			newCount > MAX_COUNT
 				? MAX_COUNT
 				: newCount < MIN_COUNT
-				? MIN_COUNT
-				: newCount;
+					? MIN_COUNT
+					: newCount;
 		setCount(validCount);
 	};
 	const handleCountMinus = () => {

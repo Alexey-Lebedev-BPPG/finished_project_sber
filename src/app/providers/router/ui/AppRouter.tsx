@@ -1,0 +1,35 @@
+import {
+	createBrowserRouter,
+	RouterProvider,
+	type RouteObject,
+} from 'react-router-dom';
+import { routeConfig } from '../config/routeConfig';
+import { MainLayout } from 'pages/layouts/MainLayout';
+import { RequireAuth } from './RequireAuth';
+
+export const AppRouter = () => {
+	const routes: RouteObject[] = Object.values(routeConfig).map((route) => {
+		const { children, element, path } = route;
+
+		const routeObject: RouteObject = { element, path };
+
+		if (Array.isArray(children))
+			routeObject.children = children.map((child) => ({
+				element: route.authOnly ? (
+					<RequireAuth>{child.element}</RequireAuth>
+				) : (
+					child.element
+				),
+				path: child.path,
+			}));
+
+		return routeObject;
+	});
+
+	const router = createBrowserRouter(
+		[{ children: routes, element: <MainLayout /> }],
+		{ basename: '/' }
+	);
+
+	return <RouterProvider router={router} />;
+};

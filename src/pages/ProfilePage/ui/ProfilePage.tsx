@@ -1,29 +1,29 @@
-import s from './ProfilePage.module.css';
+import cls from './ProfilePage.module.css';
 import classNames from 'classnames';
-import { ButtonBack } from '../../../shared/ui/ButtonBack';
-import { WithProtection } from '../../../shared/store/HOCs/WithProtection';
+import type { FC } from 'react';
+import { ButtonBack } from 'shared/ui/ButtonBack';
 
-export const ProfilePage = WithProtection(() => {
+export const ProfilePage: FC = () => {
 	return (
 		<>
 			<ButtonBack />
-			<h1 className={s['form__title']}>Мои данные</h1>
-			<form className={classNames(s['form'], s['form'])}>
-				<div className={s['form__row']}>
-					<label className={s['form__label']} htmlFor='name'>
+			<h1 className={cls['form-title']}>Мои данные</h1>
+			<form className={classNames(cls['form'], cls['form'])}>
+				<div className={cls['form-row']}>
+					<label className={cls['form-label']} htmlFor='name'>
 						{''}
 						<input
-							className={s['input']}
+							className={cls['input']}
 							name='name'
 							id='name'
 							type='text'
 							placeholder='Введите ваше имя'
 						/>
 					</label>
-					<label className={s['form__label']}>
+					<label className={cls['form-label']}>
 						{''}
 						<input
-							className={s['input']}
+							className={cls['input']}
 							name='about'
 							id='about'
 							type='text'
@@ -31,21 +31,21 @@ export const ProfilePage = WithProtection(() => {
 						/>
 					</label>
 				</div>
-				<div className={s['form__row']}>
-					<label className={s['form__label']}>
+				<div className={cls['form-row']}>
+					<label className={cls['form-label']}>
 						{''}
 						<input
-							className={s['input']}
+							className={cls['input']}
 							name='avatar'
 							id='avatar'
 							type='url'
 							placeholder='Введите ссылку на аватарку'
 						/>
 					</label>
-					<label className={s['form__label']}>
+					<label className={cls['form-label']}>
 						{''}
 						<input
-							className={s['input']}
+							className={cls['input']}
 							name='email'
 							id='email'
 							type='text'
@@ -57,20 +57,20 @@ export const ProfilePage = WithProtection(() => {
 				<button
 					type='submit'
 					className={classNames(
-						s['form__btn'],
-						s['secondary'],
-						s['maxContent']
+						cls['form-btn'],
+						cls['secondary'],
+						cls['maxContent']
 					)}>
 					Сохранить
 				</button>
 			</form>
-			<h2 className={s['form__title']}>Изменить пароль</h2>
-			<form className={classNames(s['form'], s['form'])}>
-				<div className={classNames(s['form__row'], s['form__row_min'])}>
-					<label className={s['form__label']}>
+			<h2 className={cls['form-title']}>Изменить пароль</h2>
+			<form className={classNames(cls['form'], cls['form'])}>
+				<div className={classNames(cls['form-row'], cls['form-row_min'])}>
+					<label className={cls['form-label']}>
 						{''}
 						<input
-							className={s['input']}
+							className={cls['input']}
 							name='password'
 							id='password'
 							type='password'
@@ -81,13 +81,13 @@ export const ProfilePage = WithProtection(() => {
 				<button
 					type='submit'
 					className={classNames(
-						s['form__btn'],
-						s['secondary'],
-						s['maxContent']
+						cls['form-btn'],
+						cls['secondary'],
+						cls['maxContent']
 					)}>
 					Сохранить
 				</button>
 			</form>
 		</>
 	);
-});
+};

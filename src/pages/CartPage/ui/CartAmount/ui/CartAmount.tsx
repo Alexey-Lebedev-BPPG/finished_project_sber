@@ -1,5 +1,4 @@
-import { CartProduct } from '../../../../../shared/types/global';
-import s from '../../CartPage.module.css';
+import cls from '../../CartPage.module.css';
 import classNames from 'classnames';
 
 type CartAmountProps = {
@@ -18,44 +17,44 @@ export const CartAmount = ({ products }: CartAmountProps) => {
 	};
 
 	return (
-		<div className={classNames(s['cart-amount'])}>
-			<h1 className={classNames(s['cart-amount__title'])}>Ваша корзина</h1>
-			<div className={classNames(s['cart-amount__table'])}>
-				<div className={classNames(s['cart-amount__table-row'])}>
-					<span className={classNames(s['cart-amount__table-title'])}>
+		<div className={classNames(cls['cart-amount'])}>
+			<h1 className={classNames(cls['cart-amount-title'])}>Ваша корзина</h1>
+			<div className={classNames(cls['cart-amount-table'])}>
+				<div className={classNames(cls['cart-amount-table-row'])}>
+					<span className={classNames(cls['cart-amount-table-title'])}>
 						{`Товары (${products.length})`}
 					</span>
-					<span className={classNames(s['cart-amount__table-value'])}>
+					<span className={classNames(cls['cart-amount-table-value'])}>
 						{`${allPrice} ₽`}
 					</span>
 				</div>
-				<div className={classNames(s['cart-amount__table-row'])}>
-					<span className={classNames(s['cart-amount__table-title'])}>
+				<div className={classNames(cls['cart-amount-table-row'])}>
+					<span className={classNames(cls['cart-amount-table-title'])}>
 						Скидка
 					</span>
 					<span
 						className={classNames(
-							s['cart-amount__table-value'],
-							s['cart-amount__table-value-discount']
+							cls['cart-amount-table-value'],
+							cls['cart-amount-table-value-discount']
 						)}>
 						{`${allDiscount} ₽`}
 					</span>
 				</div>
 			</div>
-			<div className={classNames(s['cart-amount__total-cost'])}>
-				<h2 className={classNames(s['cart-amount__total-cost-title'])}>
+			<div className={classNames(cls['cart-amount-total-cost'])}>
+				<h2 className={classNames(cls['cart-amount-total-cost-title'])}>
 					Общая стоимость
 				</h2>
-				<span className={classNames(s['cart-amount__total-cost-value'])}>
+				<span className={classNames(cls['cart-amount-total-cost-value'])}>
 					{`${allPrice - allDiscount} ₽`}
 				</span>
 			</div>
 			<button
 				onClick={handleSubmitCart}
 				className={classNames(
-					s['button'],
-					s['button_type_primary'],
-					s['button_type_wide']
+					cls['button'],
+					cls['button_type_primary'],
+					cls['button_type_wide']
 				)}>
 				Оформить заказ
 			</button>

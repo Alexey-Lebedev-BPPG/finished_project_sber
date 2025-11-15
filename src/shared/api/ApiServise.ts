@@ -1,5 +1,3 @@
-import { Like, Product, Review, User } from '../types/global';
-
 type ConfigApi = {
 	baseUrl: string;
 	headers: HeadersInit;

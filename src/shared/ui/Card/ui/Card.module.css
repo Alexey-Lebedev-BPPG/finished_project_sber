@@ -22,21 +22,21 @@
 		0 0.5px 2px rgb(96 97 112 / 24%);
 }
 
-.card__desc {
+.card-desc {
 	position: relative;
 	padding-top: 14px;
 	font-weight: 600;
 	font-size: 16px;
 }
 
-.card__image {
+.card-image {
 	width: 100%;
 	object-fit: contain;
 	margin-bottom: 16px;
 	aspect-ratio: 1 / 1;
 }
 
-.card__old-price {
+.card-old-price {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -48,7 +48,7 @@
 	text-decoration: line-through;
 }
 
-.card__price {
+.card-price {
 	display: block;
 	margin-bottom: 6px;
 	font-weight: 800;
@@ -56,11 +56,11 @@
 	line-height: 24px;
 }
 
-.card__price_type_discount {
+.card-price_type_discount {
 	color: #f44336;
 }
 
-.card__wight {
+.card-wight {
 	display: block;
 	margin-bottom: 2px;
 	color: #7b8e98;
@@ -68,12 +68,12 @@
 	line-height: 14px;
 }
 
-.card__name {
+.card-name {
 	font-size: 16px;
 	line-height: 1.25;
 }
 
-.card__discount {
+.card-discount {
 	padding: 2px 8px;
 	color: #ffffff;
 	font-weight: 800;
@@ -83,31 +83,31 @@
 	border-radius: 20px;
 }
 
-.card__sticky {
+.card-sticky {
 	position: absolute;
 	padding: 10px;
 }
 
-.card__sticky_type_top-left {
+.card-sticky_type_top-left {
 	top: 0;
 	left: 0;
 }
 
-.card__sticky_type_top-right {
+.card-sticky_type_top-right {
 	top: 0;
 	right: 0;
 }
 
-.card__cart {
+.card-cart {
 	margin-top: auto;
 }
 
-.card__link {
+.card-link {
 	color: currentcolor;
 	text-decoration: none;
 }
 
-.card__btn {
+.card-btn {
 	display: inline-block;
 	padding: 10px 18px;
 	color: currentcolor;
@@ -120,11 +120,11 @@
 	transition: background-color 0.3s;
 }
 
-.card__btn_type_primary {
+.card-btn_type_primary {
 	background-color: #ffe44d;
 }
 
-.card__btn_type_primary:hover {
+.card-btn_type_primary:hover {
 	color: #f44336;
 	background-color: #ffaa0d;
 }

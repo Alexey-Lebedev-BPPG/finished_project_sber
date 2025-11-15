@@ -1,4 +1,8 @@
-build
-dist
-storybook-static
+/build
+/dist
+/node_modules
+/.git
+/.idea
+/.vscode
+/.github
 

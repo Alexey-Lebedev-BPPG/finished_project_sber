@@ -7,8 +7,8 @@
 	border-radius: 100px;
 }
 
-.button-count__plus,
-.button-count__minus {
+.button-count-plus,
+.button-count-minus {
 	width: 40px;
 	height: 100%;
 	padding: 0;
@@ -19,7 +19,7 @@
 	cursor: pointer;
 }
 
-.button-count__num {
+.button-count-num {
 	display: inline-block;
 	width: 30px;
 	padding: 0;
@@ -78,7 +78,7 @@ input[type='number']:focus {
 	border-bottom: none;
 }
 
-.review__name {
+.review-name {
 	color: #1a1a1a;
 	font-weight: 800;
 	font-size: 20px;
@@ -86,14 +86,14 @@ input[type='number']:focus {
 	line-height: 24px;
 }
 
-.review__date {
+.review-date {
 	color: #7b8e98;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20px;
 }
 
-.review__city {
+.review-city {
 	color: #7b8e98;
 	font-weight: 400;
 	font-size: 12px;
@@ -101,7 +101,7 @@ input[type='number']:focus {
 	line-height: 14px;
 }
 
-.review__text {
+.review-text {
 	margin-top: 8px;
 	margin-bottom: 0;
 	color: #1a1a1a;
@@ -111,13 +111,13 @@ input[type='number']:focus {
 	line-height: 20px;
 }
 
-.review__header {
+.review-header {
 	display: flex;
 	align-items: flex-end;
 	gap: 8px;
 }
 
-.product__reviews {
+.product-reviews {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;

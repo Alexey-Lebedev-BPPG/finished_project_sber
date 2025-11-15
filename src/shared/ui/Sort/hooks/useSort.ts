@@ -1,9 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../../store/utils';
-import {
-	productsActions,
-	productsSelectors,
-} from '../../../store/slices/products';
-import { Sort } from '../../../types/global';
+import { getSortSelector, setSort } from 'entities/Product';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
 
 interface SortParams {
 	title: string;
@@ -13,10 +9,10 @@ interface SortParams {
 export const useSort = () => {
 	const dispatch = useAppDispatch();
 
-	const sort = useAppSelector(productsSelectors.getSort);
+	const sort = useAppSelector(getSortSelector);
 
-	const setSort = (newSort: Sort) => {
-		dispatch(productsActions.setSort(newSort));
+	const setSortLocal = (newSort: Sort) => {
+		dispatch(setSort(newSort));
 	};
 
 	const sortParams: SortParams[] = [
@@ -41,5 +37,5 @@ export const useSort = () => {
 			href: '#',
 		},
 	];
-	return { sort, setSort, sortParams };
+	return { sort, setSort: setSortLocal, sortParams };
 };
