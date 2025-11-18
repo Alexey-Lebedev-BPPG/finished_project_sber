@@ -2,6 +2,8 @@ import type { FC } from 'react';
 import { useCount } from '../../model/lib/hooks/useCount';
 import cls from './CartCounter.module.css';
 import classNames from 'classnames';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
 
 interface TCartCounter {
   productId: string;
@@ -14,25 +16,25 @@ export const CartCounter: FC<TCartCounter> = props => {
 
   return (
     <div className={classNames(cls['button-count'])}>
-      <button
+      <Button
         onClick={handleDecrement}
         className={classNames(cls['button-count-minus'])}
       >
         -
-      </button>
-      <input
+      </Button>
+      <Input
         onChange={handleSetCount}
         type='number'
         className={classNames(cls['button-count-num'])}
         value={count}
       />
-      <button
+      <Button
         onClick={handleIncrement}
         className={classNames(cls['button-count-plus'])}
         disabled={count >= stock}
       >
         +
-      </button>
+      </Button>
     </div>
   );
 };

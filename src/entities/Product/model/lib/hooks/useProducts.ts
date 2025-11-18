@@ -4,28 +4,34 @@ import { getProductsSelector } from '../../selectors/productSelectors';
 import { useGetProductsQuery } from '../../../api/productApi';
 import { isLiked } from 'shared/lib/helpers/isLiked';
 import { getRouteFavorites } from 'shared/consts/router';
+import { getUserSelector } from 'entities/User';
+import { useMemo } from 'react';
 
-export const useProducts = (userId?: string) => {
+export const useProducts = () => {
   const { pathname } = useLocation();
+  const user = useAppSelector(getUserSelector);
 
-  const { searchText, page, perPage, sort } =
-    useAppSelector(getProductsSelector);
+  const productSetting = useAppSelector(getProductsSelector);
 
   const isFavoritesPage = pathname === getRouteFavorites();
   const { isLoading, isError, error, data, isFetching } = useGetProductsQuery({
-    searchText,
-    sort,
-    page,
-    perPage: isFavoritesPage ? undefined : perPage,
+    ...productSetting,
+    perPage: isFavoritesPage ? undefined : productSetting.perPage,
   });
 
-  let products = data?.products || [];
+  const products = useMemo(() => {
+    let productsLocal = data?.products || [];
 
-  if (isFavoritesPage) {
-    products = products.filter(product => isLiked(product.likes, userId));
-  }
+    if (isFavoritesPage) {
+      productsLocal = productsLocal.filter(product =>
+        isLiked(product.likes, user?.id),
+      );
+    }
 
-  const productsCount = data?.length || 0;
+    return productsLocal;
+  }, [data]);
+
+  const productsCount = useMemo(() => data?.length || 0, [data?.length]);
 
   return { products, isLoading, isError, isFetching, error, productsCount };
 };

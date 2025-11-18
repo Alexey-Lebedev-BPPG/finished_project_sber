@@ -11,14 +11,14 @@ interface CartItemProps {
   product: CartProduct;
 }
 export const CartItem: FC<CartItemProps> = props => {
-  const { product } = props;
+  const {
+    product: { id, name, images, price, discount },
+  } = props;
 
   const dispatch = useDispatch();
-  const { id, name, images, price, discount } = product;
 
-  const handleDelete = () => {
-    dispatch(deleteCartProduct(id));
-  };
+  const handleDelete = () => dispatch(deleteCartProduct(id));
+
   return (
     <div className={classNames(cls['cart-item'])}>
       <div className={classNames(cls['cart-item-desc'])}>
@@ -27,7 +27,6 @@ export const CartItem: FC<CartItemProps> = props => {
           alt={name}
           className={classNames(cls['cart-item-image'])}
         />
-
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <div style={{ display: 'flex', gap: '20px', flexGrow: 1 }}>
             <Link
@@ -36,10 +35,8 @@ export const CartItem: FC<CartItemProps> = props => {
             >
               <h2>{name}</h2>
             </Link>
-
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <CartCounter productId={id} />
-
               <div className={classNames(cls['cart-item-price'])}>
                 <div
                   className={classNames(cls['price-big'], cls['price-wrap'])}
@@ -57,9 +54,12 @@ export const CartItem: FC<CartItemProps> = props => {
                 </div>
               </div>
             </div>
-            <button className={classNames(cls['cart-item-bnt-trash'])}>
-              <Icon Svg={TrashIcon} onClick={handleDelete} />
-            </button>
+            <Icon
+              Svg={TrashIcon}
+              onClick={handleDelete}
+              className={classNames(cls['cart-item-bnt-trash'])}
+              clickable
+            />
           </div>
         </div>
       </div>

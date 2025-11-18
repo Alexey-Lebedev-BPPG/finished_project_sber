@@ -1,0 +1,14 @@
+input {
+  width: 100%;
+
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.label {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}

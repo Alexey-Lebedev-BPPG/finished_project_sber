@@ -3,11 +3,12 @@ import cls from './Card.module.css';
 import { Price } from 'shared/ui/Price/Price';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
-import type { FC } from 'react';
+import { memo, useMemo, type FC } from 'react';
 import { LikeButton } from '../LikeButton/LikeButton';
 import { addCartProduct } from '../../model/slice/productSlice';
 import { getCartProductsSelector } from '../../model/selectors/cartSelectors';
 import { CartCounter } from '../CartCounter/CartCounter';
+import { Button } from 'shared/ui/Button/Button';
 
 interface CardProps {
   product: IProduct;
@@ -15,7 +16,7 @@ interface CardProps {
   userId: string;
 }
 
-export const Card: FC<CardProps> = props => {
+export const Card: FC<CardProps> = memo(props => {
   const { product, isAuth, userId } = props;
   const { discount, price, name, tags, id, images } = product;
 
@@ -23,7 +24,10 @@ export const Card: FC<CardProps> = props => {
 
   const cartProducts = useAppSelector(getCartProductsSelector);
 
-  const isProductInCart = cartProducts.some(p => p.id === id);
+  const isProductInCart = useMemo(
+    () => cartProducts.some(p => p.id === id),
+    [cartProducts, id],
+  );
 
   const addProductToCart = (product: CartProduct) =>
     dispatch(addCartProduct(product));
@@ -72,8 +76,11 @@ export const Card: FC<CardProps> = props => {
       {isProductInCart ? (
         <CartCounter productId={id} />
       ) : (
-        <button
-          onClick={() => addProductToCart({ ...product, count: 1 })}
+        <Button
+          onClick={() => {
+            console.log('add cart');
+            addProductToCart({ ...product, count: 1 });
+          }}
           disabled={isProductInCart}
           className={classNames(
             cls['card-cart'],
@@ -82,8 +89,8 @@ export const Card: FC<CardProps> = props => {
           )}
         >
           В корзину
-        </button>
+        </Button>
       )}
     </article>
   );
-};
+});

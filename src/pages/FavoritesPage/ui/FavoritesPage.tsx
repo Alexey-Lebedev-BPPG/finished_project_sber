@@ -3,15 +3,11 @@ import { ButtonBack } from 'features/ButtonBack';
 import { CardList } from 'widgets/CardList';
 import { WithQuery } from 'shared/lib/WithQuery/WithQuery';
 import { useProducts } from 'entities/Product';
-import { useAppSelector } from 'shared/lib/hooks/redux';
-import { getUserSelector } from 'entities/User';
 
 const CardListWithQuery = WithQuery(CardList);
 
 const FavoritesPage: FC = () => {
-  const user = useAppSelector(getUserSelector);
-
-  const { isLoading, isError, products, error } = useProducts(user?.id);
+  const { isLoading, isError, products, error } = useProducts();
 
   return (
     <>

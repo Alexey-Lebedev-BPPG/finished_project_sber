@@ -7,7 +7,7 @@ import {
   useDeleteLikeProductMutation,
   useSetLikeProductMutation,
 } from '../../api/productApi';
-import type { FC } from 'react';
+import { useCallback, type FC } from 'react';
 
 interface IErrorResponse {
   data: { statusCode: number; message: string; error: string };
@@ -27,7 +27,7 @@ export const LikeButton: FC<TLikeButtonProps> = props => {
 
   const isLike = product?.likes.some(l => l.userId === userId);
 
-  const toggleLike = async () => {
+  const toggleLike = useCallback(async () => {
     let response;
     if (isLike) response = await deleteLike({ id: `${product.id}` });
     else response = await setLike({ id: `${product.id}` });
@@ -36,16 +36,16 @@ export const LikeButton: FC<TLikeButtonProps> = props => {
       const error = response.error as IErrorResponse;
       toast.error(error.data.message);
     }
-  };
+  }, [deleteLike, isLike, product.id, setLike]);
 
   return (
-    <button
+    <Icon
+      clickable
+      onClick={toggleLike}
       className={classNames(cls['card-favorite'], {
         [cls['card-favorite_is-active']]: isLike,
       })}
-      onClick={toggleLike}
-    >
-      <Icon Svg={LikeSvg} />
-    </button>
+      Svg={LikeSvg}
+    />
   );
 };

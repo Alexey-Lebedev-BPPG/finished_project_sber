@@ -1,14 +1,9 @@
 import classNames from 'classnames';
-import Instagram from 'shared/assets/images/instagram.svg';
-import Telegram from 'shared/assets/images/telegram.svg';
-import Viber from 'shared/assets/images/viber.svg';
-import Vk from 'shared/assets/images/vk.svg';
-import Whatsapp from 'shared/assets/images/whatsapp.svg';
 import cls from './Footer.module.css';
 import { Logo } from 'features/Logo';
 import { Icon } from 'shared/ui/Icon/Icon';
-import { getRouteMain } from 'shared/consts/router';
 import type { FC } from 'react';
+import { firstCol, secondCol, socialCol } from '../consts/footer';
 
 export const Footer: FC = () => {
   return (
@@ -23,34 +18,20 @@ export const Footer: FC = () => {
           </div>
           <div className={cls['footer-col']}>
             <nav className={cls['menu-bottom']}>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Каталог
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Акции
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Новости
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Отзывы
-              </a>
+              {firstCol.map(({ href, className, title }) => (
+                <a key={title} href={href} className={className}>
+                  {title}
+                </a>
+              ))}
             </nav>
           </div>
           <div className={cls['footer-col']}>
             <nav className={cls['menu-bottom']}>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Оплата и доставка
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Часто спрашивают
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Обратная связь
-              </a>
-              <a href={getRouteMain()} className={cls['menu-bottom-item']}>
-                Контакты
-              </a>
+              {secondCol.map(({ href, className, title }) => (
+                <a key={title} href={href} className={className}>
+                  {title}
+                </a>
+              ))}
             </nav>
           </div>
           <div className={cls['footer-col']}>
@@ -75,46 +56,13 @@ export const Footer: FC = () => {
                 dogfood.ru@gmail.com
               </a>
               <ul className={classNames(cls['socials'])}>
-                <li>
-                  <a
-                    className={cls['socials-link']}
-                    href={`${getRouteMain()}#`}
-                  >
-                    <Icon Svg={Telegram} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cls['socials-link']}
-                    href={`${getRouteMain()}#`}
-                  >
-                    <Icon Svg={Whatsapp} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cls['socials-link']}
-                    href={`${getRouteMain()}#`}
-                  >
-                    <Icon Svg={Viber} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cls['socials-link']}
-                    href={`${getRouteMain()}#`}
-                  >
-                    <Icon Svg={Instagram} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cls['socials-link']}
-                    href={`${getRouteMain()}#`}
-                  >
-                    <Icon Svg={Vk} />
-                  </a>
-                </li>
+                {socialCol.map(({ className, href, Svg }, index) => (
+                  <li key={index}>
+                    <a className={className} href={href}>
+                      <Icon Svg={Svg} />
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState } from 'react';
 
 const MIN_COUNT = 1;
 const MAX_COUNT = 99;
@@ -6,8 +6,8 @@ const MAX_COUNT = 99;
 export const useProductCartCounter = () => {
   const [count, setCount] = useState(1);
 
-  const handleCount = (e: ChangeEvent<HTMLInputElement>) => {
-    const newCount = +e.target.value;
+  const handleCount = (value: string) => {
+    const newCount = +value;
     const validCount =
       newCount > MAX_COUNT
         ? MAX_COUNT

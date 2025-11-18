@@ -2,6 +2,8 @@ import cls from './ProfilePage.module.css';
 import classNames from 'classnames';
 import type { FC } from 'react';
 import { ButtonBack } from 'features/ButtonBack';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
 
 const ProfilePage: FC = () => {
   return (
@@ -10,51 +12,38 @@ const ProfilePage: FC = () => {
       <h1 className={cls['form-title']}>Мои данные</h1>
       <form className={classNames(cls['form'], cls['form'])}>
         <div className={cls['form-row']}>
-          <label className={cls['form-label']} htmlFor='name'>
-            {''}
-            <input
-              className={cls['input']}
-              name='name'
-              id='name'
-              type='text'
-              placeholder='Введите ваше имя'
-            />
-          </label>
-          <label className={cls['form-label']}>
-            {''}
-            <input
-              className={cls['input']}
-              name='about'
-              id='about'
-              type='text'
-              placeholder='Описание профессии'
-            />
-          </label>
+          <Input
+            className={cls['input']}
+            name='name'
+            id='name'
+            type='text'
+            placeholder='Введите ваше имя'
+          />
+          <Input
+            className={cls['input']}
+            name='about'
+            id='about'
+            type='text'
+            placeholder='Описание профессии'
+          />
         </div>
         <div className={cls['form-row']}>
-          <label className={cls['form-label']}>
-            {''}
-            <input
-              className={cls['input']}
-              name='avatar'
-              id='avatar'
-              type='url'
-              placeholder='Введите ссылку на аватарку'
-            />
-          </label>
-          <label className={cls['form-label']}>
-            {''}
-            <input
-              className={cls['input']}
-              name='email'
-              id='email'
-              type='text'
-              placeholder='email'
-            />
-          </label>
+          <Input
+            className={cls['input']}
+            name='avatar'
+            id='avatar'
+            type='url'
+            placeholder='Введите ссылку на аватарку'
+          />
+          <Input
+            className={cls['input']}
+            name='email'
+            id='email'
+            type='text'
+            placeholder='email'
+          />
         </div>
-
-        <button
+        <Button
           type='submit'
           className={classNames(
             cls['form-btn'],
@@ -63,23 +52,20 @@ const ProfilePage: FC = () => {
           )}
         >
           Сохранить
-        </button>
+        </Button>
       </form>
       <h2 className={cls['form-title']}>Изменить пароль</h2>
       <form className={classNames(cls['form'], cls['form'])}>
         <div className={classNames(cls['form-row'], cls['form-row_min'])}>
-          <label className={cls['form-label']}>
-            {''}
-            <input
-              className={cls['input']}
-              name='password'
-              id='password'
-              type='password'
-              placeholder='Пароль'
-            />
-          </label>
+          <Input
+            className={cls['input']}
+            name='password'
+            id='password'
+            type='password'
+            placeholder='Пароль'
+          />
         </div>
-        <button
+        <Button
           type='submit'
           className={classNames(
             cls['form-btn'],
@@ -88,7 +74,7 @@ const ProfilePage: FC = () => {
           )}
         >
           Сохранить
-        </button>
+        </Button>
       </form>
     </>
   );

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Icon } from 'shared/ui/Icon/Icon';
 import SearchIcon from 'shared/assets/icons/search.svg';
 import { useProductsSearchForm } from '../model/lib/hooks/useProductsSearchForm';
+import { Input } from 'shared/ui/Input/Input';
 
 export const Search: FC = () => {
   const { searchValue, setSearchValue } = useProductsSearchForm();
@@ -11,17 +12,20 @@ export const Search: FC = () => {
 
   return (
     <form className={cls['search']}>
-      <input
+      <Input
         type='text'
         className={cls['search-input']}
         placeholder='Поиск'
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={value => setSearchValue(value)}
       />
       {searchValue.length > 0 && (
-        <button className={cls['search-btn']} onClick={handleClearSearchText}>
-          <Icon Svg={SearchIcon} />
-        </button>
+        <Icon
+          clickable
+          className={cls['search-btn']}
+          onClick={handleClearSearchText}
+          Svg={SearchIcon}
+        />
       )}
     </form>
   );

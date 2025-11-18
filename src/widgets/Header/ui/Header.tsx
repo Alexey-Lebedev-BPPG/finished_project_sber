@@ -11,13 +11,14 @@ import {
   getRouteFavorites,
   getRouteProfile,
 } from 'shared/consts/router';
-import type { FC } from 'react';
+import { useMemo, type FC } from 'react';
 import { Icon } from 'shared/ui/Icon/Icon';
 import FavoritesIcon from 'shared/assets/icons/favorites.svg';
 import CartIcon from 'shared/assets/icons/cart.svg';
 import ProfileIcon from 'shared/assets/icons/profile.svg';
 import { Search } from 'features/Search';
 import Box from '@mui/material/Box';
+import { ReviewModal } from 'widgets/ReviewModal/ReviewModal';
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
@@ -25,11 +26,14 @@ export const Header: FC = () => {
   const user = useAppSelector(getUserSelector);
   const cartProducts = useAppSelector(getCartProductsSelector);
 
-  const { products } = useProducts(user?.id);
+  const { products } = useProducts();
 
-  const likeCount = products.filter(product =>
-    isLiked(product.likes, user?.id),
-  ).length;
+  const likeCount = useMemo(
+    () => products.filter(product => isLiked(product.likes, user?.id)).length,
+    [products, user?.id],
+  );
+
+  const countCart = useMemo(() => cartProducts.length, [cartProducts.length]);
 
   const accessToken = useAppSelector(getAccessTokenSelector);
 
@@ -50,9 +54,7 @@ export const Header: FC = () => {
           </Link>
           <Link className={cls['header-favorites-link']} to={getRouteCart()}>
             <Icon Svg={CartIcon} />
-            <span className={cls['header-icon-bubble']}>
-              {cartProducts.length}
-            </span>
+            <span className={cls['header-icon-bubble']}>{countCart}</span>
           </Link>
           {accessToken && (
             <Box
@@ -70,6 +72,7 @@ export const Header: FC = () => {
               <span onClick={handleLogout}>Выйти</span>
             </Box>
           )}
+          <ReviewModal />
         </div>
       </div>
     </header>

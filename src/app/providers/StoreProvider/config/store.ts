@@ -8,16 +8,7 @@ import { rtkApi } from 'shared/api/rtkApi';
 import { userReducer } from 'entities/User';
 import { productReducer } from 'entities/Product';
 import sessionStorage from 'redux-persist/lib/storage/session';
-import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 
 export const createReduxStore = (initialState?: StateSchema) => {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -30,8 +21,6 @@ export const createReduxStore = (initialState?: StateSchema) => {
   const persistConfig = {
     key: 'root',
     storage: sessionStorage,
-    // if need
-    // whitelist: ['user'],
   };
 
   const persistedReducer = persistReducer(
@@ -43,9 +32,8 @@ export const createReduxStore = (initialState?: StateSchema) => {
     devTools: import.meta.env.NODE_ENV !== 'production',
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
+        immutableCheck: false,
+        serializableCheck: false,
       }).concat(rtkApi.middleware),
     preloadedState: initialState,
     reducer: persistedReducer as unknown as ReducersMapObject<StateSchema>,

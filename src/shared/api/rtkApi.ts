@@ -9,8 +9,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: headers => {
     const allSessionStorage = sessionStorage.getItem('persist:root') || '';
-    const persist = JSON.parse(allSessionStorage);
-    const user = JSON.parse(persist.user);
+    const persist = JSON.parse(allSessionStorage) || '';
+    const user = JSON.parse(persist.user) || '';
 
     if (user?.accessToken) headers.set('Authorization', user.accessToken);
 

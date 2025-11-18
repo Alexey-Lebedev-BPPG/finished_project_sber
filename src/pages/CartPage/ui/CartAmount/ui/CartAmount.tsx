@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import cls from '../../CartPage/CartPage.module.css';
 import classNames from 'classnames';
+import { Button } from 'shared/ui/Button/Button';
+import { useAppSelector } from 'shared/lib/hooks/redux';
+import { getCartProductsSelector } from 'entities/Product';
 
-interface CartAmountProps {
-  products: CartProduct[];
-}
-export const CartAmount: FC<CartAmountProps> = props => {
-  const { products } = props;
+export const CartAmount: FC = () => {
+  const products = useAppSelector(getCartProductsSelector);
 
   const allPrice = products.reduce((acc, p) => p.price * p.count + acc, 0);
   const allDiscount = products.reduce(
@@ -53,7 +53,7 @@ export const CartAmount: FC<CartAmountProps> = props => {
           {`${allPrice - allDiscount} ₽`}
         </span>
       </div>
-      <button
+      <Button
         onClick={handleSubmitCart}
         className={classNames(
           cls['button'],
@@ -62,7 +62,7 @@ export const CartAmount: FC<CartAmountProps> = props => {
         )}
       >
         Оформить заказ
-      </button>
+      </Button>
     </div>
   );
 };

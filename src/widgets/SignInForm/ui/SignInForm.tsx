@@ -55,7 +55,7 @@ export const SignInForm: FC = () => {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' style={{ flexGrow: 1 }} maxWidth='xs'>
       <Box
         sx={{
           marginTop: 8,

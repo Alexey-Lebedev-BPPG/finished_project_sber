@@ -1,5 +1,4 @@
 import { getPageSelector, setPage, useProducts } from 'entities/Product';
-import { getUserSelector } from 'entities/User';
 import { type RefObject, useCallback, useLayoutEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
 
@@ -11,9 +10,8 @@ export const useLoadMore = ({ ref }: UseLoadMoreParams) => {
   const dispatch = useAppDispatch();
 
   const page = useAppSelector(getPageSelector);
-  const user = useAppSelector(getUserSelector);
 
-  const { products, isFetching, productsCount } = useProducts(user?.id);
+  const { products, isFetching, productsCount } = useProducts();
 
   const isEndOfList = products.length >= productsCount;
 

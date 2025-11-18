@@ -19,8 +19,8 @@ const CartPage: FC = () => {
         <div className={classNames(cls['cart-title'])}>
           <span>{products.length}</span> в корзине
         </div>
-        <CartList products={products} />
-        <CartAmount products={products} />
+        <CartList />
+        <CartAmount />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FC } from 'react';
 import classNames from 'classnames';
 import cls from './ReviewForm.module.css';
 import { Rating } from 'shared/ui/Rating/Rating';
+import { Button } from 'shared/ui/Button/Button';
 
 export const ReviewForm: FC = () => {
   const [reviewText, setReviewText] = useState('');
@@ -23,13 +24,13 @@ export const ReviewForm: FC = () => {
         value={reviewText}
         onChange={handleChange}
       />
-      <button
+      <Button
         type='submit'
         className={classNames(cls['form-btn'], cls['pramary'])}
         onClick={handleClick}
       >
         Отправить отзыв
-      </button>
+      </Button>
     </form>
   );
 };

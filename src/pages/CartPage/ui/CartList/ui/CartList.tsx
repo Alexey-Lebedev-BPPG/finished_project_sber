@@ -2,13 +2,11 @@ import type { FC } from 'react';
 import { CartItem } from '../../CartItem';
 import cls from '../../CartPage/CartPage.module.css';
 import classNames from 'classnames';
+import { useAppSelector } from 'shared/lib/hooks/redux';
+import { getCartProductsSelector } from 'entities/Product';
 
-interface CartListProps {
-  products: CartProduct[];
-}
-
-export const CartList: FC<CartListProps> = props => {
-  const { products } = props;
+export const CartList: FC = () => {
+  const products = useAppSelector(getCartProductsSelector);
 
   return (
     <div className={classNames(cls['cart-list'])}>

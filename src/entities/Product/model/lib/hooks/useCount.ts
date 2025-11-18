@@ -1,4 +1,3 @@
-import { type ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'shared/lib/hooks/redux';
 import { getCartProductsSelector } from '../../selectors/cartSelectors';
@@ -26,8 +25,8 @@ export const useCount = (productId: string) => {
     dispatch(setCartProductCount({ id, count: validCount }));
   };
 
-  const handleSetCount = (e: ChangeEvent<HTMLInputElement>) => {
-    const newCount = +e.target.value;
+  const handleSetCount = (value: string) => {
+    const newCount = +value;
     const validCount =
       newCount > MAX_COUNT
         ? MAX_COUNT

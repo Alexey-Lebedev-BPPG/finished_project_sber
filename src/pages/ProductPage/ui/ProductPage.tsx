@@ -7,7 +7,7 @@ import { Rating } from 'shared/ui/Rating/Rating';
 import { ButtonBack } from 'features/ButtonBack';
 import { ReviewList } from 'widgets/ReviewList/ui/ReviewList/ReviewList';
 import { useAppSelector } from 'shared/lib/hooks/redux';
-import type { FC } from 'react';
+import { useMemo, type FC } from 'react';
 import {
   CartCounter,
   getCartProductsSelector,
@@ -22,7 +22,10 @@ import { ProductCartCounter } from 'features/ProductCartCounter';
 const ProductPage: FC = () => {
   const location = useLocation();
   const { pathname } = location;
-  const productId = pathname.split(getRouteMain()).at(-1) || '';
+  const productId = useMemo(
+    () => pathname.split(getRouteMain()).at(-1) || '',
+    [pathname],
+  );
 
   const cartProducts = useAppSelector(getCartProductsSelector);
   const accessToken = useAppSelector(getAccessTokenSelector);

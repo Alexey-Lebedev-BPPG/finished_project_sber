@@ -1,0 +1,28 @@
+.button {
+  display: flex;
+  padding: 8px;
+  background: black;
+  color: white;
+  border-radius: 10px;
+}
+
+.button:focus {
+  background: red;
+}
+
+input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid;
+  color: black;
+  padding: 0 16px;
+  height: 40px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.success {
+  color: #2e7d32;
+}

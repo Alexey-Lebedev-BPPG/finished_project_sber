@@ -6,9 +6,5 @@ import { Icon } from 'shared/ui/Icon/Icon';
 export const ButtonBack: FC = () => {
   const navigate = useNavigate();
 
-  return (
-    <button onClick={() => navigate(-1)}>
-      <Icon Svg={BackSvg} />
-    </button>
-  );
+  return <Icon clickable onClick={() => navigate(-1)} Svg={BackSvg} />;
 };

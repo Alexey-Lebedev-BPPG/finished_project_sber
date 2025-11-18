@@ -4,6 +4,8 @@ import { useAppDispatch } from 'shared/lib/hooks/redux';
 import type { FC } from 'react';
 import { addCartProduct } from 'entities/Product';
 import { useProductCartCounter } from '../model/lib/hooks/useProductCartCounter';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
 
 interface ProductCartCounterProps {
   product: IProduct;
@@ -21,28 +23,31 @@ export const ProductCartCounter: FC<ProductCartCounterProps> = props => {
   return (
     <div className={classNames('product-btn-wrap')}>
       <div className={cls['button-count']}>
-        <button
+        <Button
           className={cls['button-count-minus']}
           onClick={handleCountMinus}
         >
           -
-        </button>
-        <input
+        </Button>
+        <Input
           type='number'
           className={cls['button-count-num']}
           value={count}
           onChange={handleCount}
         />
-        <button className={cls['button-count-plus']} onClick={handleCountPlus}>
+        <Button className={cls['button-count-plus']} onClick={handleCountPlus}>
           +
-        </button>
+        </Button>
       </div>
-      <button
-        onClick={() => addProductToCart({ ...product, count })}
+      <Button
+        onClick={() => {
+          console.log('add cart Product');
+          addProductToCart({ ...product, count });
+        }}
         className={classNames(cls['button'], cls['button_type_primary'])}
       >
         В корзину
-      </button>
+      </Button>
     </div>
   );
 };
